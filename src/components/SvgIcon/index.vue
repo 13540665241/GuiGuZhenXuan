@@ -47,45 +47,46 @@ defineProps({
 </style>-->
 <template>
   <div>
-    <svg :style="{width: width, height: height}" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg
+      :style="{ width: width, height: height }"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
       <use :xlink:href="prefix + name" :fill="color"></use>
     </svg>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 // 接收父组件传递过来的参数
 const props = defineProps({
   // xlink:href 属性值的前缀
   prefix: {
     type: String,
-    default: '#icon-'
+    default: '#icon-',
   },
   // svg 矢量图的名字
   name: {
     type: String,
-    required: true
+    required: true,
   },
   // svg 图标的颜色
   color: {
     type: String,
-    default: 'currentColor'
+    default: 'currentColor',
   },
   // svg 宽度
   width: {
     type: String,
-    default: '16px'
+    default: '16px',
   },
   // svg 高度
   height: {
     type: String,
-    default: '16px'
-  }
-});
+    default: '16px',
+  },
+})
 </script>
 
-<style>
-
-</style>
+<style></style>
