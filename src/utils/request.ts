@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
+
 //利用axios对象的create方法,去创建axioss实例
 let request = axios.create({
   //   基础路径
