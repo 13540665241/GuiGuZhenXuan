@@ -2,12 +2,11 @@
 import {
   createRouter,
   createWebHashHistory,
-  createWebHistory,
 } from 'vue-router'
 import { constantRoutes } from './routes'
 
 //创建路由器
-const router = createRouter({
+const router:any = createRouter({
   // 路由hash模式
   history: createWebHashHistory(),
   routes: constantRoutes,
@@ -15,4 +14,4 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
-export default router
+export default router;
