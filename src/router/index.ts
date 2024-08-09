@@ -1,12 +1,9 @@
 //通过vue-router创建路由实例
-import {
-  createRouter,
-  createWebHashHistory,
-} from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { constantRoutes } from './routes'
 
 //创建路由器
-const router:any = createRouter({
+const router: any = createRouter({
   // 路由hash模式
   history: createWebHashHistory(),
   routes: constantRoutes,
@@ -14,4 +11,4 @@ const router:any = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
-export default router;
+export default router
