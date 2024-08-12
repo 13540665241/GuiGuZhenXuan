@@ -19,7 +19,6 @@ import router from '@/router'
 // 引入pinia仓库
 import pinia from '@/stores'
 
-
 // 获取应用实例对象
 const app = createApp(App)
 app.use(createPinia())
