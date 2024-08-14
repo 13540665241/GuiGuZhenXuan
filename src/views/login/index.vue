@@ -72,8 +72,6 @@ let $router = useRouter()
 // 获取表单元素
 let loginForms = ref()
 
-
-
 // 登录方法
 const login = async () => {
   //获取全部表单校验通过再发请求
@@ -129,9 +127,9 @@ const validatorPassword = (rule: any, value: any, callback: any) => {
 const rules = {
   username: [
     // 定义一个对象，用于校验账号长度是否符合要求
-    { trigger: 'change', validator: validatorUsername },],
-  password: [
-    { trigger: 'change', validator: validatorPassword }],
+    { trigger: 'change', validator: validatorUsername },
+  ],
+  password: [{ trigger: 'change', validator: validatorPassword }],
 }
 </script>
 
