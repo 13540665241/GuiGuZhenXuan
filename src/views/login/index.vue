@@ -3,24 +3,44 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginForms">
+        <el-form
+          class="login-form"
+          :model="loginForm"
+          :rules="rules"
+          ref="loginForms"
+        >
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
 
           <!-- 用户名输入框-->
           <el-form-item prop="username">
-            <el-input :prefix-icon="User" v-model="loginForm.username" placeholder="请输入您的账号"></el-input>
+            <el-input
+              :prefix-icon="User"
+              v-model="loginForm.username"
+              placeholder="请输入您的账号"
+            ></el-input>
           </el-form-item>
 
           <!-- 密码输入框-->
           <el-form-item prop="password">
-            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password
-              placeholder="请输入您的密码"></el-input>
+            <el-input
+              type="password"
+              :prefix-icon="Lock"
+              v-model="loginForm.password"
+              show-password
+              placeholder="请输入您的密码"
+            ></el-input>
           </el-form-item>
 
           <!-- 登录按钮-->
           <el-form-item>
-            <el-button :loading="loading" class="login-btn" type="primary" size="default" @click="login">
+            <el-button
+              :loading="loading"
+              class="login-btn"
+              type="primary"
+              size="default"
+              @click="login"
+            >
               登录
             </el-button>
           </el-form-item>
@@ -53,18 +73,18 @@ let $router = useRouter()
 let loginForms = ref()
 
 // 自定义校验规则需要的函数
- const validatorUsername = (rule: any, value: any, callback: any)=>{
-  if(value.length >= 5){
+const validatorUsername = (rule: any, value: any, callback: any) => {
+  if (value.length >= 5) {
     callback()
-  }else{
+  } else {
     callback(new Error('账号长度至少五位'))
   }
 }
 
-const validatorPassword=(rule: any, value: any, callback: any)=>{
-  if(value.length>=6){
+const validatorPassword = (rule: any, value: any, callback: any) => {
+  if (value.length >= 6) {
     callback()
-  }else{
+  } else {
     callback(new Error('密码长度至少6位,至多15位'))
   }
 }
@@ -72,7 +92,7 @@ const validatorPassword=(rule: any, value: any, callback: any)=>{
 // 登录方法
 const login = async () => {
   //获取全部表单校验通过再发请求
-  await loginForms.value.validate();
+  await loginForms.value.validate()
   // 控制加载按钮
   loading.value = true
   // 编程式导航展示数据首页
@@ -100,8 +120,6 @@ const login = async () => {
   }
 }
 
-
-
 // 定义表单按钮需要配置的对象
 const rules = {
   username: [
@@ -113,7 +131,7 @@ const rules = {
           message: '账号长度至少5位,至多10位',  // 不符合长度要求时的提示信息
           trigger: 'change'  // 触发校验的时机为输入值变化时
         } */
-    { trigger: 'change', validator: validatorUsername }
+    { trigger: 'change', validator: validatorUsername },
   ],
   password: [
     /*     {
@@ -123,7 +141,7 @@ const rules = {
           message: '长度在 6 到 15 个字符',
           trigger: 'change'
         } */
-    { trigger: 'change', validator: validatorPassword }
+    { trigger: 'change', validator: validatorPassword },
   ],
 }
 </script>

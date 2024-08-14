@@ -3,10 +3,10 @@ import { defineStore } from 'pinia'
 // 引入接口
 import { reqLogin } from '@/api/user'
 // 引入类型
-import type { loginFormData,loginResponseData } from '@/api/user/type'
-import type {UserState} from '@/stores/modules/types/type'
+import type { loginFormData, loginResponseData } from '@/api/user/type'
+import type { UserState } from '@/stores/modules/types/type'
 //引入本地存储工具方法
-import { SET_TOKEN,GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
 //创建小仓库
 let useUserStore = defineStore('user', {
   // 仓库存储数据的地方
@@ -19,18 +19,18 @@ let useUserStore = defineStore('user', {
   actions: {
     async userLogin(data: loginFormData) {
       // 登录请求
-      let result:loginResponseData = await reqLogin(data)
+      let result: loginResponseData = await reqLogin(data)
       // 登录成功200
       if (result.code == 200) {
         // 将token存储到本地
-        this.token = (result.data.token as string)
+        this.token = result.data.token as string
         // 将token存储到本地
         // localStorage.setItem('TOKEN', (result.data.token as string))
-        SET_TOKEN((result.data.token as string))
+        SET_TOKEN(result.data.token as string)
         // 返回结果
         return 'ok'
       } else {
-        return Promise.reject(new Error((result.data.message)))
+        return Promise.reject(new Error(result.data.message))
       }
     },
   },
