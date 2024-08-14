@@ -72,22 +72,7 @@ let $router = useRouter()
 // 获取表单元素
 let loginForms = ref()
 
-// 自定义校验规则需要的函数
-const validatorUsername = (rule: any, value: any, callback: any) => {
-  if (value.length >= 5) {
-    callback()
-  } else {
-    callback(new Error('账号长度至少五位'))
-  }
-}
 
-const validatorPassword = (rule: any, value: any, callback: any) => {
-  if (value.length >= 6) {
-    callback()
-  } else {
-    callback(new Error('密码长度至少6位,至多15位'))
-  }
-}
 
 // 登录方法
 const login = async () => {
@@ -120,13 +105,33 @@ const login = async () => {
   }
 }
 
+// 自定义校验规则需要的函数
+// 验证账号规则
+const validatorUsername = (rule: any, value: any, callback: any) => {
+  if (value.length === 0) {
+    callback(new Error('请输入账号'))
+  } else {
+    callback()
+  }
+}
+// 验证密码规则
+const validatorPassword = (rule: any, value: any, callback: any) => {
+  if (value.length === 0) {
+    callback(new Error('请输入密码'))
+  } else if (value.length < 6 || value.length > 16) {
+    callback(new Error('密码应为6~16位的任意组合'))
+  } else {
+    callback()
+  }
+}
+
 // 定义表单按钮需要配置的对象
 const rules = {
   username: [
     // 定义一个对象，用于校验账号长度是否符合要求
-    { trigger: 'change', validator: validatorUsername },
-  ],
-  password: [{ trigger: 'change', validator: validatorPassword }],
+    { trigger: 'change', validator: validatorUsername },],
+  password: [
+    { trigger: 'change', validator: validatorPassword }],
 }
 </script>
 
