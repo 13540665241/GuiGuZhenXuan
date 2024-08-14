@@ -54,7 +54,7 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 // 引入用户相关接口
-import useUserStore from '@/stores/modules/user.ts'
+import useUserStore from '@/stores/modules/user'
 // 引入路由
 import { useRouter } from 'vue-router'
 // 提示框
@@ -124,24 +124,14 @@ const login = async () => {
 const rules = {
   username: [
     // 定义一个对象，用于校验账号长度是否符合要求
-    /*     {
-          required: true,  // 必填项
-          min: 5,         // 最小长度限制为6
-          max: 10,        // 最大长度限制为10
-          message: '账号长度至少5位,至多10位',  // 不符合长度要求时的提示信息
-          trigger: 'change'  // 触发校验的时机为输入值变化时
-        } */
-    { trigger: 'change', validator: validatorUsername },
+    { trigger: 'change',
+      validator: validatorUsername
+    },
   ],
   password: [
-    /*     {
-          required: true,
-          min: 6,
-          max: 15,
-          message: '长度在 6 到 15 个字符',
-          trigger: 'change'
-        } */
-    { trigger: 'change', validator: validatorPassword },
+    { trigger: 'change',
+      validator: validatorPassword
+    },
   ],
 }
 </script>
