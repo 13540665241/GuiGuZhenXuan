@@ -3,36 +3,24 @@
     <el-row>
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
-        <el-form class="login-form">
+        <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
           <h2>欢迎来到硅谷甄选</h2>
+
           <!-- 用户名输入框-->
-          <el-form-item>
-            <el-input
-              :prefix-icon="User"
-              v-model="loginForm.username"
-              placeholder="请输入您的账号"
-            ></el-input>
+          <el-form-item prop="username">
+            <el-input :prefix-icon="User" v-model="loginForm.username" placeholder="请输入您的账号"></el-input>
           </el-form-item>
+
           <!-- 密码输入框-->
-          <el-form-item>
-            <el-input
-              type="password"
-              :prefix-icon="Lock"
-              v-model="loginForm.password"
-              show-password
-              placeholder="请输入您的密码"
-            ></el-input>
+          <el-form-item prop="password">
+            <el-input type="password" :prefix-icon="Lock" v-model="loginForm.password" show-password
+              placeholder="请输入您的密码"></el-input>
           </el-form-item>
+
           <!-- 登录按钮-->
           <el-form-item>
-            <el-button
-              :loading="loading"
-              class="login-btn"
-              type="primary"
-              size="default"
-              @click="login"
-            >
+            <el-button :loading="loading" class="login-btn" type="primary" size="default" @click="login">
               登录
             </el-button>
           </el-form-item>
@@ -42,7 +30,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 // 引入用户相关接口
@@ -51,6 +39,8 @@ import useUserStore from '@/stores/modules/user.ts'
 import { useRouter } from 'vue-router'
 // 提示框
 import { ElNotification } from 'element-plus'
+// 引入获取当前时间的函数
+import { getTime } from '@/utils/time'
 
 // 定义变量控制按钮加载
 let loading = ref(false)
@@ -59,8 +49,30 @@ let useStore = useUserStore()
 let loginForm = reactive({ username: 'admin', password: '111111' })
 // 获取路由器
 let $router = useRouter()
+// 获取表单元素
+let loginForms = ref()
+
+// 自定义校验规则需要的函数
+ const validatorUsername = (rule: any, value: any, callback: any)=>{
+  if(value.length >= 5){
+    callback()
+  }else{
+    callback(new Error('账号长度至少五位'))
+  }
+}
+
+const validatorPassword=(rule: any, value: any, callback: any)=>{
+  if(value.length>=6){
+    callback()
+  }else{
+    callback(new Error('密码长度至少6位,至多15位'))
+  }
+}
+
 // 登录方法
 const login = async () => {
+  //获取全部表单校验通过再发请求
+  await loginForms.value.validate();
   // 控制加载按钮
   loading.value = true
   // 编程式导航展示数据首页
@@ -70,7 +82,7 @@ const login = async () => {
     await $router.push('/')
     // 登录成功提示
     ElNotification({
-      title: '登录成功',
+      title: `HI,${getTime()}好`,
       message: '欢迎回来',
       type: 'success',
     })
@@ -79,13 +91,40 @@ const login = async () => {
   } catch (error) {
     // 加载失败，控制按钮消失
     loading.value = false
-    // 等里失败提示
+    // 登录失败提示
     ElNotification({
-      title: '登录失败',
-      message: error.message,
+      title: '账号或密码不正确',
+      // message: rules.password.message,
       type: 'error',
     })
   }
+}
+
+
+
+// 定义表单按钮需要配置的对象
+const rules = {
+  username: [
+    // 定义一个对象，用于校验账号长度是否符合要求
+    /*     {
+          required: true,  // 必填项
+          min: 5,         // 最小长度限制为6
+          max: 10,        // 最大长度限制为10
+          message: '账号长度至少5位,至多10位',  // 不符合长度要求时的提示信息
+          trigger: 'change'  // 触发校验的时机为输入值变化时
+        } */
+    { trigger: 'change', validator: validatorUsername }
+  ],
+  password: [
+    /*     {
+          required: true,
+          min: 6,
+          max: 15,
+          message: '长度在 6 到 15 个字符',
+          trigger: 'change'
+        } */
+    { trigger: 'change', validator: validatorPassword }
+  ],
 }
 </script>
 

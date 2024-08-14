@@ -5,7 +5,7 @@ import { ElMessage } from 'element-plus'
 //利用axios对象的create方法,去创建axioss实例
 let request = axios.create({
   //   基础路径
-  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
 })
 
 //第二步:request实例添加请求与响应拦截器

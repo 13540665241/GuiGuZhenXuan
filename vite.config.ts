@@ -6,9 +6,11 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 // 引入SVG需要用到的插件
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
+import { ConfigEnv, UserConfigExport, loadEnv } from 'vite'
 
 // https://vitejs.dev/config/
-export default defineConfig((command) => {
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
+  let env = loadEnv(mode, process.cwd())
   return {
     plugins: [
       vue(),
@@ -29,5 +31,16 @@ export default defineConfig((command) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
+    // 代理跨域
+    server: {
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          target: env.VITE_SERVE,
+          // 需要代理跨域
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
+    },
   }
-})
+}
