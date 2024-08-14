@@ -124,15 +124,9 @@ const login = async () => {
 const rules = {
   username: [
     // 定义一个对象，用于校验账号长度是否符合要求
-    { trigger: 'change',
-      validator: validatorUsername
-    },
+    { trigger: 'change', validator: validatorUsername },
   ],
-  password: [
-    { trigger: 'change',
-      validator: validatorPassword
-    },
-  ],
+  password: [{ trigger: 'change', validator: validatorPassword }],
 }
 </script>
 
