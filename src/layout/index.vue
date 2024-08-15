@@ -1,30 +1,21 @@
 <template>
   <div class="layout-container">
-    <!--    左侧菜单-->
+    <!--左侧菜单-->
     <div class="layout-slider">
       <Logo></Logo>
-      <!--      展示菜单-->
-      <!--      滚动组件-->
+      <!--展示菜单-->
+      <!--滚动组件-->
       <el-scrollbar class="scrollbar">
-        <!--        菜单组件-->
+        <!--菜单组件-->
         <el-menu background-color="#001529" text-color="white">
-          <!--          <el-menu-item index="1">首页</el-menu-item>
-          <el-menu-item index="2">数据大屏</el-menu-item>
-&lt;!&ndash;          折叠的菜单&ndash;&gt;
-          <el-sub-menu index="3">
-            <template #title>权限管理</template>
-            <el-menu-item index="3-1">用户管理</el-menu-item>
-            <el-menu-item index="3-2">角色管理</el-menu-item>
-            <el-menu-item index="3-3">菜单管理</el-menu-item>
-          </el-sub-menu>-->
-          <!--          根据路由动态生成组件-->
+          <!--根据路由动态生成组件-->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
-    <!--    顶部菜单-->
+    <!--顶部菜单-->
     <div class="layout-tabbar">456</div>
-    <!--    内容展示区域-->
+    <!--内容展示区域-->
     <div class="layout-main">
       <p style="height: 10000px">4饿4444</p>
     </div>
