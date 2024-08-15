@@ -5,8 +5,8 @@ export const constantRoutes = [
     name: 'login',
     component: () => import('@/views/login/index.vue'),
     meta: {
-      title: '登录',//菜单需要的标题
-      hidden: true,//代表路由标题是否隐藏
+      title: '登录', //菜单需要的标题
+      hidden: true, //代表路由标题是否隐藏
     },
   },
   {
