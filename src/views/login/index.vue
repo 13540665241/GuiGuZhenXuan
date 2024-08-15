@@ -10,7 +10,7 @@
           ref="loginForms"
         >
           <h1>Hello</h1>
-          <h2>欢迎来到硅谷甄选</h2>
+          <h2>后台管理系统</h2>
 
           <!-- 用户名输入框-->
           <el-form-item prop="username">
@@ -107,7 +107,7 @@ const login = async () => {
 // 验证账号规则
 const validatorUsername = (rule: any, value: any, callback: any) => {
   if (value.length === 0) {
-    callback(new Error('请输入账号'))
+    callback(new Error('账号不能为空'))
   } else {
     callback()
   }
@@ -115,7 +115,7 @@ const validatorUsername = (rule: any, value: any, callback: any) => {
 // 验证密码规则
 const validatorPassword = (rule: any, value: any, callback: any) => {
   if (value.length === 0) {
-    callback(new Error('请输入密码'))
+    callback(new Error('密码不能为空'))
   } else if (value.length < 6 || value.length > 16) {
     callback(new Error('密码应为6~16位的任意组合'))
   } else {
