@@ -3,7 +3,11 @@
     <template v-for="(item, index) in menuList" :key="item.path">
       <!--没有子路由-->
       <template v-if="!item.children">
-        <el-menu-item :index="item.path" v-if="!item.meta.hidden" @click="goRoute">
+        <el-menu-item
+          :index="item.path"
+          v-if="!item.meta.hidden"
+          @click="goRoute"
+        >
           <template #title>
             <el-icon>
               <component :is="item.meta.icon"></component>
@@ -50,7 +54,7 @@
 defineProps(['menuList'])
 
 // 点击菜单回调
-const goRoute = (vc:any) => {
+const goRoute = (vc: any) => {
   // 跳转路由
 }
 </script>

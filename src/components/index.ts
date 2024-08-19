@@ -3,7 +3,6 @@ import SvgIcon from '@/components/SvgIcon/index.vue'
 import type { App, Component } from 'vue'
 const components: { [name: string]: Component } = { SvgIcon }
 
-
 // 引入饿了么提供的全局图标组件
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
