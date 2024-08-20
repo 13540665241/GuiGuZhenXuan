@@ -135,7 +135,7 @@ export const constantRoutes = [
           title: 'SPU管理',
           hidden: false,
           icon: 'SetUp',
-        }
+        },
       },
       {
         path: '/product/sku',
@@ -147,7 +147,7 @@ export const constantRoutes = [
           icon: 'ScaleToOriginal',
         },
       },
-    ]
+    ],
   },
   {
     path: '/404',

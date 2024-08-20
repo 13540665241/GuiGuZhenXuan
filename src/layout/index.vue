@@ -30,7 +30,6 @@ import Menu from './menu/index.vue'
 // 右侧内容展示区
 import Main from './main/index.vue'
 
-
 // 获取用户相关的小仓库
 import useUserStore from '@/stores/modules/user'
 let userStore = useUserStore()
