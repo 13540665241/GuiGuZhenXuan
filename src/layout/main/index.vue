@@ -8,15 +8,17 @@
   </router-view>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup></script>
 
 <style scoped>
 .fade-enter-from {
   opacity: 0;
 }
+
 .fade-enter-active {
   transition: opacity 0.5s;
 }
+
 .fade-enter-to {
   opacity: 1;
 }
