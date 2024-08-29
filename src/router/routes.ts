@@ -15,9 +15,9 @@ export const constantRoutes = [
     name: 'layout',
     component: () => import('@/layout/index.vue'),
     meta: {
-      title: 'layout',
+      title: '',
       hidden: false,
-      icon: 'Avatar',
+      icon: '',
     },
     redirect: '/home',
     children: [
@@ -31,15 +31,6 @@ export const constantRoutes = [
           icon: 'HomeFilled',
         },
       },
-      /*      {
-        path: '/ceshi',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '测试',
-          hidden: true,
-          icon:'Histogram'
-        },
-      },*/
     ],
   },
   {
@@ -65,7 +56,7 @@ export const constantRoutes = [
     children: [
       {
         path: '/acl/user',
-        name: 'Acl',
+        name: 'User',
         component: () => import('@/views/acl/user/index.vue'),
         meta: {
           title: '用户管理',

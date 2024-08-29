@@ -5,7 +5,7 @@
       <Breadcrumb></Breadcrumb>
     </div>
 
-    <!--    &lt;!&ndash;顶部右侧-->
+    <!--顶部右侧-->
     <div class="tabbar_right">
       <Setting></Setting>
     </div>
@@ -15,6 +15,12 @@
 <script lang="ts" setup>
 import Breadcrumb from './breadcrumb/index.vue'
 import Setting from './setting/index.vue'
+</script>
+
+<script lang="ts">
+export default {
+  name: 'Tabbar',
+}
 </script>
 
 <style lang="scss" scoped>
