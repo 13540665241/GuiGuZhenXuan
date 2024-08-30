@@ -16,6 +16,7 @@ let useUserStore = defineStore('user', {
   state: (): UserState => {
     return {
       token: GET_TOKEN(), //存储用户唯一标识的token
+      // token: 123456, //存储用户唯一标识的token
       menuRoutes: constantRoutes, //仓库存储菜单需要的数组（路由）
       username: '',
       avatar: '',
@@ -39,17 +40,21 @@ let useUserStore = defineStore('user', {
         return Promise.reject(new Error(result.data.message))
       }
     },
+
+    //获取用户信息的方法
+    async userInfo() {
+      //获取用户信息存储在仓库中
+      let result = await reqUserInfo()
+
+      //如果获取用户信息成功
+      console.log(result)
+      if (result.code == 200) {
+        this.username = result.data.checkUser.usename
+        this.avatar = result.data.checkUser.avatar
+      }
+    },
   },
-  //获取用户信息的方法
-  async userInfo() {
-    //获取用户信息存储在仓库中
-    let result = await reqUserInfo()
-    //如果获取用户信息成功
-    if (result.code == 200) {
-      this.username = result.data.checkUser.usename
-      this.avatar = result.data.checkUser.avatar
-    }
-  },
+
   getters: {},
 })
 
