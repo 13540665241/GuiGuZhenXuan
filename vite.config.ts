@@ -1,12 +1,11 @@
 import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
+import { ConfigEnv, loadEnv, UserConfigExport } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // 引入SVG需要用到的插件
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
-import { ConfigEnv, UserConfigExport, loadEnv } from 'vite'
 
 // https://vitejs.dev/config/
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {

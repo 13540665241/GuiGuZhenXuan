@@ -27,13 +27,18 @@ let useUserStore = defineStore('user', {
     async userLogin(data: loginFormData) {
       // 登录请求
       let result: loginResponseData = await reqLogin(data)
+
       // 登录成功200
       if (result.code == 200) {
+        /* 这里之前错误的写成了this.token = result.data.token as string，导致无法获取到token
+         * 如果 reqLogin 的返回数据 result.data 是一个字符串（即 token 本身），那么应该使用 this.token = result.data as string
+         * 如果 result.data 是一个对象，并且这个对象中包含 token 字段，应该使用 this.token = result.data.token as string
+         * */
         // 将token存储到本地
-        this.token = result.data.token as string
+        this.token = result.data as string
         // 将token存储到本地
         // localStorage.setItem('TOKEN', (result.data.token as string))
-        SET_TOKEN(result.data.token as string)
+        SET_TOKEN(result.data as string)
         // 返回结果
         return 'ok'
       } else {
@@ -45,12 +50,15 @@ let useUserStore = defineStore('user', {
     async userInfo() {
       //获取用户信息存储在仓库中
       let result = await reqUserInfo()
+      console.log('result的值：', result)
 
       //如果获取用户信息成功
-      console.log(result)
       if (result.code == 200) {
-        this.username = result.data.checkUser.usename
-        this.avatar = result.data.checkUser.avatar
+        this.username = result.data.name
+        console.log('username的值', this.username)
+
+        this.avatar = result.data.avatar
+        console.log('avatar的值', this.avatar)
       }
     },
   },

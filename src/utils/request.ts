@@ -15,8 +15,8 @@ request.interceptors.request.use((config) => {
   // 获取用户相关小仓库：获取仓库内部的Token
   const userStore = useUserStore()
 
-  console.log(userStore.token)
-  console.log(userStore)
+  // console.log(userStore.token)
+  // console.log(userStore)
 
   if (userStore.token) {
     config.headers.token = userStore.token
