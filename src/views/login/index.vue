@@ -4,10 +4,10 @@
       <el-col :span="12" :xs="0"></el-col>
       <el-col :span="12" :xs="24">
         <el-form
-          class="login-form"
+          ref="loginForms"
           :model="loginForm"
           :rules="rules"
-          ref="loginForms"
+          class="login-form"
         >
           <h1>Hello</h1>
           <h2>后台管理系统</h2>
@@ -15,8 +15,8 @@
           <!-- 用户名输入框-->
           <el-form-item prop="username">
             <el-input
-              :prefix-icon="User"
               v-model="loginForm.username"
+              :prefix-icon="User"
               placeholder="请输入您的账号"
             ></el-input>
           </el-form-item>
@@ -24,11 +24,11 @@
           <!-- 密码输入框-->
           <el-form-item prop="password">
             <el-input
-              type="password"
-              :prefix-icon="Lock"
               v-model="loginForm.password"
-              show-password
+              :prefix-icon="Lock"
               placeholder="请输入您的密码"
+              show-password
+              type="password"
             ></el-input>
           </el-form-item>
 
@@ -37,8 +37,8 @@
             <el-button
               :loading="loading"
               class="login-btn"
-              type="primary"
               size="default"
+              type="primary"
               @click="login"
             >
               登录
@@ -50,13 +50,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { User, Lock } from '@element-plus/icons-vue'
+<script lang="ts" setup>
+import { Lock, User } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue'
 // 引入用户相关接口
 import useUserStore from '@/stores/modules/user'
 // 引入路由
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 // 提示框
 import { ElNotification } from 'element-plus'
 // 引入获取当前时间的函数
@@ -71,6 +71,8 @@ let loginForm = reactive({ username: 'admin', password: '111111' })
 let $router = useRouter()
 // 获取表单元素
 let loginForms = ref()
+// 获取路由对象
+let $route = useRoute()
 
 // 登录方法
 const login = async () => {
@@ -82,7 +84,10 @@ const login = async () => {
   try {
     // 调用用户登录方法
     await useStore.userLogin(loginForm)
-    await $router.push('/')
+    // 判断是否有query参数，如果有，就往query参数页面跳转
+    let redirect: string = $route.query.redirect as string
+    // 跳转路由
+    $router.push({ path: redirect || '/' })
     // 登录成功提示
     ElNotification({
       title: `HI,${getTime()}好`,

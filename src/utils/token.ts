@@ -10,3 +10,9 @@ export const GET_TOKEN = () => {
   console.log('TOKEN 的值:', token)
   return token
 }
+
+// 删除本地存储的方法
+export const REMOVE_TOKEN = () => {
+  localStorage.removeItem('TOKEN')
+  console.log('删除了 TOKEN')
+}

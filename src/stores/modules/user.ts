@@ -1,7 +1,7 @@
 //创建用户相关小仓库
 import { defineStore } from 'pinia'
 // 引入接口
-import { reqLogin, reqUserInfo } from '@/api/user'
+import { reqLogin, reqLogout, reqUserInfo } from '@/api/user'
 // 引入类型
 import type {
   loginFormData,
@@ -10,7 +10,7 @@ import type {
 } from '@/api/user/type'
 import type { UserState } from '@/stores/modules/types/type'
 //引入本地存储工具方法
-import { GET_TOKEN, SET_TOKEN } from '@/utils/token'
+import { GET_TOKEN, REMOVE_TOKEN, SET_TOKEN } from '@/utils/token'
 // 引入常量路由
 import { constantRoutes } from '@/router/routes'
 
@@ -27,6 +27,7 @@ let useUserStore = defineStore('user', {
   },
   // 修改仓库数据的方法
   actions: {
+    // 用户登录的方法
     async userLogin(data: loginFormData) {
       // 登录请求
       let result: loginResponseData = await reqLogin(data)
@@ -59,6 +60,27 @@ let useUserStore = defineStore('user', {
       if (result.code == 200) {
         this.username = result.data.name as string
         this.avatar = result.data.avatar as string
+      }
+    },
+
+    //退出登录的方法
+    async userLogout() {
+      // 调用接口实现退出登录
+      const result = await reqLogout()
+      // 判断是否退出成功
+      if (result.code == 200) {
+        // 退出成功
+        // 清空仓库中用户信息
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        // 清空本地存储中的token（两种方法）
+        // 第一种：localStorage.removeItem('TOKEN')
+        // 调用封装的清除方法
+        REMOVE_TOKEN()
+      } else {
+        // 退出失败
+        return Promise.reject(new Error(result.message))
       }
     },
   },

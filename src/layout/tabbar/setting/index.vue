@@ -29,13 +29,14 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </template>
   </el-dropdown>
 </template>
 
 <script lang="ts" setup>
+import { useRoute, useRouter } from 'vue-router'
 import { ArrowDown } from '@element-plus/icons-vue'
 import useLayOutSettingStore from '@/stores/modules/setting'
 // 获取用户信息仓库
@@ -59,6 +60,22 @@ const fullScreen = () => {
     // 退出全屏
     document.exitFullscreen()
   }
+}
+
+// 退出登录
+// 获取路由器对象
+const $router = useRouter()
+// 获取路由对象
+const $route = useRoute()
+const logout = () => {
+  // 第一件事：向服务器发请求「退出登录接口」
+  // 第二件事：清除本地存储的token|username|password
+  userStore.userLogout()
+  // 第三件事：跳转登录页面
+  $router.push({
+    path: '/login',
+    query: { redirect: $route.path },
+  })
 }
 </script>
 
