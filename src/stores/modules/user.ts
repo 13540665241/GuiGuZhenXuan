@@ -3,7 +3,11 @@ import { defineStore } from 'pinia'
 // 引入接口
 import { reqLogin, reqUserInfo } from '@/api/user'
 // 引入类型
-import type { loginFormData, loginResponseData } from '@/api/user/type'
+import type {
+  loginFormData,
+  loginResponseData,
+  userInfoResponseData,
+} from '@/api/user/type'
 import type { UserState } from '@/stores/modules/types/type'
 //引入本地存储工具方法
 import { GET_TOKEN, SET_TOKEN } from '@/utils/token'
@@ -16,7 +20,6 @@ let useUserStore = defineStore('user', {
   state: (): UserState => {
     return {
       token: GET_TOKEN(), //存储用户唯一标识的token
-      // token: 123456, //存储用户唯一标识的token
       menuRoutes: constantRoutes, //仓库存储菜单需要的数组（路由）
       username: '',
       avatar: '',
@@ -49,16 +52,13 @@ let useUserStore = defineStore('user', {
     //获取用户信息的方法
     async userInfo() {
       //获取用户信息存储在仓库中
-      let result = await reqUserInfo()
+      const result: userInfoResponseData = await reqUserInfo()
       console.log('result的值：', result)
 
       //如果获取用户信息成功
       if (result.code == 200) {
-        this.username = result.data.name
-        console.log('username的值', this.username)
-
-        this.avatar = result.data.avatar
-        console.log('avatar的值', this.avatar)
+        this.username = result.data.name as string
+        this.avatar = result.data.avatar as string
       }
     },
   },

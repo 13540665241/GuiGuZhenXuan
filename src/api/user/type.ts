@@ -5,10 +5,10 @@ export interface loginFormData {
   password: string
 }
 
-interface dataType {
-  token?: string
-  message?: string
-}
+// interface dataType {
+//   token?: string
+//   message?: string
+// }
 
 //定义全部接口返回数据都拥有ts类型
 export interface ResponseData {
@@ -19,7 +19,7 @@ export interface ResponseData {
 
 //定义登录接口返回数据类型
 export interface loginResponseData extends ResponseData {
-  data: dataType
+  data: string
 }
 
 //定义获取用户信息返回数据类型
