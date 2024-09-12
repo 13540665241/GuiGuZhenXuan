@@ -18,6 +18,8 @@ import globalComponent from '@/components'
 import router from '@/router'
 // 引入pinia仓库
 import pinia from '@/stores'
+// 引用路由鉴权
+import './permisstion'
 
 // 获取应用实例对象
 const app = createApp(App)
